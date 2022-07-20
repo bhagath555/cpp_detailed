@@ -22,6 +22,8 @@ int main () {
 }
 
 // function definition to swap the values.
+// Here, we are not just passing a value of a variable, we are passing a variable along with the same address.
+// While calling, variable with exact address will be stored.
 void swap(int &x, int &y) {
    int temp;
    temp = x; /* save the value at address x */
