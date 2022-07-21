@@ -8,12 +8,16 @@ int main () {
    double *p;
 
    p = balance;
-   *(p+0) = 10; // Assing new value to an array.
-   // As per our array defination, 4th index  -> *(p+4) = 50;
-   // Extending array size by one, using points arthematics
+   *(p+0) = 10; /* Assing new value to an array. 
+   As per our array defination, 4th index  -> *(p+4) = 50;
+   Extending array size by one, using points arthematics.  */
    *(p+size_arr) = 45; // *(p+5) -> 5th index
    size_arr++; // Updating array size.
-   // output each array element's value 
+   /* Note: Even though we are able to extend our array. using approach, we are contacting a memory
+   that we shouldn't access, means, there might be a other variable store at that location.
+   We are not sure, wheather that extra memory accessable or not. 
+   In conclusion, this approach is considered as a bad practice.*/
+   // output each array element's value
    cout << "Array values using pointer " << endl;
    
    for ( int i = 0; i < size_arr; i++ ) {
