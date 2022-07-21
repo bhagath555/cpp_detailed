@@ -1,1 +1,2 @@
-Files can be tricky, but it is fun enough!
+This is the first line of the file
+Here goes the second
