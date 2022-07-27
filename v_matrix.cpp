@@ -4,9 +4,14 @@
 
 using namespace std;
 
-typedef vector<vector<int>> mat;
+typedef vector<int> vect;
 
-void matrix_disp(const mat& m){
+template <typename T>
+using mat = std::vector<std::vector<T>>;
+
+// typedef vector<vector<int>> mat;
+template <typename T>
+void matrix_disp(const mat<T>& m){
     for (const auto& i : m)
     {
         for (const auto& j : i)
@@ -17,8 +22,9 @@ void matrix_disp(const mat& m){
     }
 }
 
-mat n_n_matrix(int  n, int scale){
-    mat m2;
+
+mat<int> n_n_matrix(int  n, int scale){
+    mat<int> m2;
     for (int i=0; i<n; i++)
     {
         m2.push_back(vector<int>());
@@ -30,7 +36,8 @@ mat n_n_matrix(int  n, int scale){
     return m2;
 }
 
-bool check_matrix(const mat& m){
+template <typename T>
+bool check_matrix(const mat<T>& m){
     int rows = m.size();
     int cols = m[0].size();
     bool valid_matrix = true;
@@ -43,17 +50,18 @@ bool check_matrix(const mat& m){
     return valid_matrix;
 }
 
-mat matrix_scale(mat m, int scale){
-    mat m2;
+
+mat<float> matrix_scale(mat<int> m, float scale){
+    mat<float> m2;
     int rows = m.size();
     int cols = m[0].size();
     m2.reserve(rows*cols);
     for (int i=0; i<rows; i++)
     {
-        m2.emplace_back(vector<int>());
+        m2.emplace_back(vector<float>());
         for (int j=0; j<cols; j++)
         {
-            m2[i].emplace_back(m[i][j]*scale);
+            m2[i].emplace_back((float)(m[i][j]*scale));
         }   
     }
     return m2;
@@ -61,14 +69,25 @@ mat matrix_scale(mat m, int scale){
 
 int main(void)
 {
-    mat m1;
+    std::cout << "-----------------------Manually appending rows----------------------\n";
+    // Creating vector of data.
+    vect v1 = {1,2,3,4};
+    vect v2 = {10,20,30,40};
+    mat<int> m0;
+    // Appending vectors as rows.
+    m0.push_back(v1);
+    m0.push_back(v2);
+    m0.push_back({100,200,300,400});
+    matrix_disp(m0);  
+    std::cout << "---------------------Automating the matrix generation ----------------\n";  
+    mat<int> m1;
     m1 = {{1,2,3,4},{5,6,7,8}};
     std::cout << "Dimesions of m1 matrix\nRows : " << m1.size() << "\n";
     std::cout << "Coloms : " << m1[0].size() << "\n";
     std::cout << "================ m1 matrix\n";
     matrix_disp(m1);
     
-    mat m2;
+    mat<int> m2;
     m2 = n_n_matrix(3, 5);
     std::cout << "Creating 3*3 matrix, with all values set to 5\n";
     matrix_disp(m2);
@@ -76,8 +95,7 @@ int main(void)
     std::cout << "-----------------Matrix Scale-------------------\n";
     std::cout << "Before scaling\n";
     matrix_disp(m1);
-    mat m3 = matrix_scale(m1, 5);
-    
+    mat<float> m3 = matrix_scale(m1, 5);
     std::cout << "After scaling\n";
     matrix_disp(m3);
 }
