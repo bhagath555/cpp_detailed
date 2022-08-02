@@ -25,4 +25,7 @@ int main(void){
 
     float sum2 = fpntr2(2,4.3);
     cout << "Sum of 2 and 4.3 is " << sum2 << endl;
+
+    cout << "Address of function add_int_float : " << &add_int_float << endl;
+    cout << "Address of the pointer pointing to add_int_float : " << fpntr2 << endl;
 }
